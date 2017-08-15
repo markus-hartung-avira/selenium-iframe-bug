@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "author": "Markus Hartung",
+  "name": "Selenium Iframe Bug",
+  "description": "Demonstrates a bug when switching to an iframe with extension src",
+  "version": "1.0.0",
+  "content_scripts": [{
+    "matches": [
+      "*://*/*"
+    ],
+    "js": [
+      "content.js"
+    ]
+  }],
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "iframe.html"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "selenium-iframe-bug@avira.com"
+    }
+  }
+}
