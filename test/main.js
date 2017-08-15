@@ -1,3 +1,4 @@
+const path = require('path');
 require('chromedriver');
 const webdriver = require('selenium-webdriver');
 const Capabilities = require('selenium-webdriver/lib/capabilities').Capabilities;
@@ -23,7 +24,7 @@ function shutdownServer() {
 
 const capabilities = Capabilities.chrome()
 capabilities.set('chromeOptions', {
-  args: ['--load-extension=extension/']
+  args: [`--load-extension=${path.resolve('extension/')}`]
 })
 
 const driver = new webdriver.Builder()
