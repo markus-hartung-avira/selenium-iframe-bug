@@ -2,6 +2,7 @@ const path = require('path');
 require('chromedriver');
 const webdriver = require('selenium-webdriver');
 const Capabilities = require('selenium-webdriver/lib/capabilities').Capabilities;
+const logging = require('selenium-webdriver/lib/logging');
 
 const express = require('express');
 
@@ -26,6 +27,9 @@ const capabilities = Capabilities.chrome()
 capabilities.set('chromeOptions', {
   args: [`--load-extension=${path.resolve('extension/')}`]
 })
+const prefs = new logging.Preferences();
+prefs.setLevel(logging.Type.DRIVER, logging.Level.DEBUG);
+capabilities.setLoggingPrefs(prefs);
 
 const driver = new webdriver.Builder()
   .forBrowser('chrome')
@@ -49,10 +53,19 @@ function typeSomething() {
   })
 }
 
+function retrieveLogs() {
+  driver.manage().logs().get(logging.Type.DRIVER).then((entries) => {
+    entries.forEach(function(entry) {
+      console.log('[%s] %s', entry.level.name, entry.message);
+    });
+  });
+}
+
 startServer()
   .then(() => driver.get('http://localhost:8080/index.html'))
   .then(typeSomething)
   .then(() => switchToFrame('normalSrc'))
   .then(() => switchToFrame('extensionSrc'))
-  .then(typeSomething);
+  .then(retrieveLogs);
+  //.then(typeSomething);
   //.then(shutdownServer);
