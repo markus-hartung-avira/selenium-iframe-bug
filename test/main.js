@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 require('chromedriver');
 const webdriver = require('selenium-webdriver');
@@ -54,9 +55,11 @@ function typeSomething() {
 }
 
 function retrieveLogs() {
+  const ws = fs.createWriteStream('./driver.log', { flags: 'w' });
   driver.manage().logs().get(logging.Type.DRIVER).then((entries) => {
     entries.forEach(function(entry) {
       console.log('[%s] %s', entry.level.name, entry.message);
+      ws.write(`[${entry.level.name}] ${entry.message}`);
     });
   });
 }
