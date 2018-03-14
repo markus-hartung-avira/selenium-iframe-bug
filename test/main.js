@@ -43,14 +43,16 @@ function switchToFrame(id) {
     return driver.switchTo().frame(element)
       .then(() => console.log('switch done:', id))
       .catch(e => console.error('switch error:', e.message))
-      .then(typeSomething)
+      .then(() => typeSomething(id))
       .then(() => driver.switchTo().defaultContent());
   }).catch((e) => console.error('could not find element', id));
 }
 
-function typeSomething() {
+function typeSomething(id) {
   return driver.findElement({ css: 'input' }).then((element) => {
-    element.sendKeys('I was here');
+    const message = `I was here: ${id}`;
+    console.log('typing', message)
+    return element.sendKeys(message);
   })
 }
 
@@ -58,7 +60,7 @@ function retrieveLogs() {
   const ws = fs.createWriteStream('./driver.log', { flags: 'w' });
   driver.manage().logs().get(logging.Type.DRIVER).then((entries) => {
     entries.forEach(function(entry) {
-      console.log('[%s] %s', entry.level.name, entry.message);
+      // console.log('[%s] %s', entry.level.name, entry.message);
       ws.write(`[${entry.level.name}] ${entry.message}`);
     });
   });
@@ -66,7 +68,7 @@ function retrieveLogs() {
 
 startServer()
   .then(() => driver.get('http://localhost:8080/index.html'))
-  .then(typeSomething)
+  .then(() => typeSomething('top'))
   .then(() => switchToFrame('normalSrc'))
   .then(() => switchToFrame('extensionSrc'))
   .then(retrieveLogs);
