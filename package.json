@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/markus-hartung-avira/selenium-iframe-bug#readme",
   "dependencies": {
-    "chromedriver": "^2.31.0",
-    "express": "^4.15.4",
-    "selenium-webdriver": "^3.5.0"
+    "chromedriver": "^2.36.0",
+    "express": "^4.16.2",
+    "selenium-webdriver": "^3.6.0"
   }
 }

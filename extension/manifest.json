@@ -5,14 +5,6 @@
   "description": "Demonstrates a bug when switching to an iframe with extension src",
   "version": "1.0.0",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvK+2QIE8lMgNtpXj14PiH9yHHJX/sSq2Mw4GREehyQfAe3SB4EOcUX5/SvKrK/LmkzFuD6D4Yzwub5QI0dxu+8YSnd4rlYQ9f+grmGYoUJ7eg9Z8Iry6my1inNdJJSsTzFHwpkgHpQoqKMUDolCSDyuw1loIbMPkfCqcbZJx3Ux192w8jbu17x8C20dnGJd0Z2SZ5eLEgrjRvP0bn5FPkvaeqEdmTDGbDsA1yVNDXxV75hisKLrIuvv5Kh0iTEmwG1o1NwlJ9QPiPZ0g4ipkFo2cfoecvTIazZcfOHgfVufj94FhZ6W0ZKv1Ytb+ljb6VvHxur3hDfb8vXRidS9dywIDAQAB",
-  "content_scripts": [{
-    "matches": [
-      "*://*/*"
-    ],
-    "js": [
-      "content.js"
-    ]
-  }],
   "permissions": [
     "http://*/*",
     "https://*/*"
